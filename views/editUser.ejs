@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <title>Edit Profile</title>
+</head>
+  <header><%- include('partials/loginav.ejs') %></header>
+<body  >
+   <section class="h-100 gradient-form" style="background-color: #eee;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10">
+        <div class="card rounded-3 text-black">
+          <div class="row g-0">
+            <div class="col-lg-6">
+              <div class="card-body p-md-5 mx-md-4">
+
+                <div class="text-center">
+                  <img src="/publics/logo-color.png" id="loginpic" alt="logo">
+                  <h4 class="mt-1 mb-5 pb-1">Edit User </h4>
+                </div>
+                <form action="/editUser" method="post" enctype="multipart/form-data" class="border rounded p-4">
+                  <input type="hidden" id="login_Id" name="login_Id" value="<%= info.login_Id %>">
+
+                 <div class="form-outline mb-4">
+                  <label for="fullName" class="form-label">Full Name</label>
+                  <input type="text" class="form-control" id="name" name="name" value="<%= info.firstName %>" placeholder="<%= info.firstName %>">
+                </div>
+
+                 <div class="form-outline mb-4">
+                  <label for="zip" class="form-label">Zip Code</label>
+                  <input type="text" class="form-control" id="location" name="location" value="<%= info.zip %>" placeholder="<%= info.zip %>">
+                </div>
+
+                  <div class="form-outline mb-4">
+                  <label for="zIp" class="form-label">Song Name & Artist</label>
+                  <input type="text" class="form-control" id="song" name="song" value="<%= info.song %>" placeholder="<%= info.song %>">
+                </div>
+
+                  <div class="form-outline mb-4">
+                    <label for="website" class="form-label">Bio</label>
+                    <textarea  id="bio" name="bio" class="form-control" placeholder="Enter Bio"><%= info.bio %> </textarea>
+                  </div>
+      
+                  <div class="form-outline mb-4">
+                     <label>Sex:</label>
+                    <input type="radio" id="male" name="sex" value="M"
+              
+                        <% if(info.sex == 'M'){ %>
+                      checked
+                    <% } %>
+                        
+                        
+                        required>
+              
+              
+                     
+                    <label for="male">Male</label>
+                    <input type="radio" id="female" name="sex" value="F"
+                        <%=(info.sex == 'F')?"checked":""%> >     
+                    <label for="female">Female</label><br>
+                  </div>
+              <div class="form-outline mb-4">
+                <label for="Image 1" class="form-label">Image 1</label>
+                <input type="file" id="image_1_path" name="image_1" value="<%= info.image_1%>" class="form-control" > 
+              </div>
+              <div class="form-outline mb-4">
+                     
+                <label for="Image 2" class="form-label">Image 2</label>
+                <input type="file" id="image_2_path" name="image_2" value="<%= info.image_2%>" class="form-control" >          
+                 </div>
+                <div class="form-outline mb-4">                     
+                <label for="Image 3" class="form-label">Image 3</label>
+                <input type="file" id="image_3_path" name="image_3" value="<%= info.image_3%>" class="form-control" >           
+                 </div>
+                  <div class="text-center pt-1 mb-5 pb-1">
+                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Update</button>
+                  </div>
+</form>
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+              <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                <h4 class="mb-4">"Find your mate, make a splash!"
+</h4>
+                  <h5 class="mb-5">- Otter Fodder</h4>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <h4 class="mb-4">"The love of your life is waiting on the other side!"
+</h4>
+                  <h5 class="mb-5">- Otter Fodder</h4>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <h4 class="mb-4">"Don't wait, join Otter Fodder!"
+</h4>
+                  <h5 class="mb-5">- Otter Fodder</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+
+</html>

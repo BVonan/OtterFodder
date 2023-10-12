@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Messages</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+</style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      
+     
+  </head>
+  <body id="messages" >
+    <header><%- include('partials/loginav.ejs') %></header>
+    <h1 class="text-center mt-3"><%= info.firstName %></h1><hr>
+    <div class="messages-image-container">
+      <img class="profile-image" src="<%=info.image_1 %>" alt="user icon">
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <div class="card">
+            <div class="card-header">
+              Chat
+            </div>
+            <div class="card-body">
+              <div id="message-container">
+                <% messages.forEach(function(message) { %>
+                <div class="<%= message.sender_id === login_Id ? 'text-right' : 'text-left' %>">
+                <p><%= message.content %></p>
+                <small class="timestamp"><%= new Date(message.timestamp).toLocaleString() %></small>
+              </div>
+                <% }); %>
+                  
+              </div>
+            </div>
+            <div class="card-footer">
+              <form id="send-message-form">
+                <div class="input-group">
+                  <input type="text" class="form-control" name="content" id="message-input" placeholder="Type your message...">
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+                    <script>
+function previewProfile() {
+    window.location.href = '/displayUser?login_Id=<%=info.login_Id%>';
+}
+
+        function editProfile(event) {
+          
+            event.stopPropagation();
+            window.location.href = '/editUser?login_Id= <%=info.login_Id%>';
+        }
+
+document.getElementById("send-cmessage-form").addEventListener("submit", async function(event) {
+  
+    const messageInput = document.getElementById("message-input");
+    const content = messageInput.value;
+    console.log("MESSAGE: "+content);
+  
+    if (!content) return;
+  
+    const response = await fetch(`/messages/<%= info.login_Id %>`, {
+      method: "POST",
+      body: JSON.stringify({ content }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  
+    if (response.ok) {
+      const messageContainer = document.getElementById("message-container");
+      const newMessage = document.createElement("div");
+      newMessage.classList.add("text-right");
+      newMessage.innerHTML = `<p>${content}</p><small>${new Date().toLocaleString()}</small>`;
+      messageContainer.appendChild(newMessage);
+      messageInput.value = "";
+    }
+  });
+                    </script>
+                    
+  </body>
+</html>

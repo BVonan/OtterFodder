@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Matches</title>
+    <link href="/css/style.css" rel="stylesheet">
+    <script src="/scripts/main.js"></script>
+   
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </head>
+  <body id="matches">
+    <header><%- include('partials/loginav.ejs') %></header>
+    <h1 class="text-center mt-3">Matches</h1>
+    <div class="container">
+      <div class="row">
+        <% matches_list.forEach(function(match, i) { %>
+          <div class="col-md-4 mt-5">
+            <div class="card">
+              <img src="<%= match.image_1 %>" class="card-img-top" alt="match pic-1">
+              <div class="card-body">
+                <h5 class="card-title"><%= match.firstName %></h5>
+                <p class="card-text"><%= match.bio %></p>
+                  <p class="card-text"><%= match.zip %></p>
+                  <p class="card-text"><%= matchDistances[i] %> away from you</p>
+                 
+
+                
+                 <a href="/messages/<%= match.login_Id %>" class="btn btn-primary">Message</a>
+              </div>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+    <script>
+        function previewProfile() {
+    window.location.href = '/displayUser?login_Id=<%=login_Id%>';
+}
+
+function editProfile(event) {
+
+    event.stopPropagation();
+    window.location.href = '/editUser?login_Id= <%=login_Id%>';
+}
+
+    </script>
+  </body>
+</html>
