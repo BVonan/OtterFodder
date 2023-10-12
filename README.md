@@ -1,6 +1,6 @@
 # Otter Fodder
 
-Otter Fodder is a student group projectgit, a dating app designed for students at CSU Monterey Bay. It is built using Node.js, HTML, and CSS.
+Otter Fodder is a student group project. It is a dating app designed for students at CSU Monterey Bay. It is built using Node.js, HTML, and CSS.
 
 ## Features
 
